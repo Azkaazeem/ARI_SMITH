@@ -21,6 +21,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
   const ctaRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
 
+  const statsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -46,7 +48,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
         opacity: 0,
         y: 20,
         duration: 0.8
-      }, '-=0.6');
+      }, '-=0.6')
+      .from(statsRef.current, {
+        opacity: 0,
+        y: 20,
+        duration: 0.8
+      }, '-=0.5');
     }, containerRef);
 
     return () => ctx.revert();
@@ -59,7 +66,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen min-h-[750px] flex items-center justify-center overflow-hidden bg-black select-none"
+      className="relative w-full min-h-screen flex flex-col justify-between items-center overflow-hidden bg-black select-none pt-28 pb-8 sm:pb-12 px-4 sm:px-8"
     >
       {/* 3D WebGL Canvas Scene in Background */}
       <CanvasContainer />
@@ -75,7 +82,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
       <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-black/40 to-black/70 pointer-events-none z-10" />
 
       {/* Hero Content Layer */}
-      <div className="relative z-20 max-w-5xl mx-auto px-6 text-center flex flex-col items-center pointer-events-none pt-12">
+      <div className="relative z-20 max-w-5xl mx-auto w-full text-center flex flex-col items-center pointer-events-none my-auto py-6">
         
         {/* Real Location Tagline from arismith.co.uk */}
         <div
@@ -91,17 +98,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
           </span>
         </div>
 
-        {/* Pinned Split Typography: "REALITY IS AN ILLUSION" */}
+        {/* Split Typography: "REALITY IS AN ILLUSION" */}
         <div className="overflow-visible space-y-1 sm:space-y-2 mb-4">
           <h1
             ref={textTopRef}
-            className="font-display text-3xl xs:text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-[0.08em] sm:tracking-[0.14em] text-white uppercase drop-shadow-[0_10px_40px_rgba(0,0,0,0.95)]"
+            className="font-display text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-[0.08em] sm:tracking-[0.14em] text-white uppercase drop-shadow-[0_10px_40px_rgba(0,0,0,0.95)]"
           >
             Reality Is
           </h1>
           <h1
             ref={textBottomRef}
-            className="font-display text-3xl xs:text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-[0.08em] sm:tracking-[0.14em] uppercase transition-colors duration-500 drop-shadow-[0_10px_40px_rgba(0,0,0,0.95)]"
+            className="font-display text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-[0.08em] sm:tracking-[0.14em] uppercase transition-colors duration-500 drop-shadow-[0_10px_40px_rgba(0,0,0,0.95)]"
             style={{ color: themeMeta.accentHex }}
           >
             An Illusion
@@ -109,8 +116,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
         </div>
 
         {/* Authentic Subtitle from arismith.co.uk */}
-        <div ref={subtitleRef} className="max-w-2xl mb-8 mt-4">
-          <p className="font-serif text-sm sm:text-lg text-white/90 font-light tracking-wide leading-relaxed">
+        <div ref={subtitleRef} className="max-w-2xl mb-8 mt-3">
+          <p className="font-serif text-sm sm:text-base md:text-lg text-white/90 font-light tracking-wide leading-relaxed">
             Unforgettable close-up magic, mind-reading and illusion that captivates, amazes and sparks conversation long after the event has ended.
           </p>
         </div>
@@ -144,9 +151,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
 
       </div>
 
-      {/* Real Stats Metrics Bar from arismith.co.uk */}
-      <div className="absolute bottom-6 left-0 w-full z-20 px-8 pointer-events-none hidden md:block">
-        <div className="max-w-6xl mx-auto grid grid-cols-4 gap-4 text-center border-t border-white/15 pt-4 text-white/80">
+      {/* Real Stats Metrics Bar from arismith.co.uk (In Flow, Never Overlaps) */}
+      <div
+        ref={statsRef}
+        className="relative z-20 w-full max-w-6xl mx-auto pt-6 border-t border-white/15 pointer-events-none hidden md:block"
+      >
+        <div className="grid grid-cols-4 gap-4 text-center text-white/80">
           <div className="border-r border-white/10 pr-4">
             <div className="font-display text-xl lg:text-2xl font-bold text-white">5+</div>
             <div className="font-mono text-[9px] text-white/40 uppercase tracking-widest">Years Experience</div>
