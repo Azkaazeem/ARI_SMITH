@@ -46,14 +46,12 @@ export const Navigation: React.FC<NavigationProps> = () => {
           className="flex items-center gap-3 group"
           title="Ari Smith - Magician, Mentalist & Illusionist"
         >
-          <div className="w-8 h-8 sm:w-9 sm:h-9 border border-white/20 bg-black flex items-center justify-center p-1 group-hover:border-white/40 transition-colors">
-            <img
-              src={realLogo}
-              alt="Ari Smith Logo"
-              className="w-full h-full object-contain filter invert opacity-95"
-            />
-          </div>
-          <div className="flex flex-col">
+          <img
+            src={realLogo}
+            alt="Ari Smith Signature Logo"
+            className="h-7 sm:h-8 w-auto max-w-[85px] sm:max-w-[105px] object-contain opacity-95 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+          />
+          <div className="flex flex-col border-l border-white/20 pl-2.5 sm:pl-3">
             <span className="font-display tracking-[0.2em] text-xs sm:text-sm font-bold text-white uppercase group-hover:text-white/90">
               Ari Smith
             </span>

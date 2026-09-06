@@ -56,15 +56,13 @@ export const Footer: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin }) =
         {/* Top Header Split: Logo & Real-Time Manchester Clock */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-10 border-b border-white/10">
           
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 border border-white/20 bg-black flex items-center justify-center p-1">
-              <img
-                src={realLogo}
-                alt="Ari Smith Official Logo"
-                className="w-full h-full object-contain filter invert opacity-95"
-              />
-            </div>
-            <div>
+          <div className="flex items-center gap-4">
+            <img
+              src={realLogo}
+              alt="Ari Smith Signature Logo"
+              className="h-10 sm:h-12 w-auto max-w-[120px] sm:max-w-[140px] object-contain opacity-95 hover:opacity-100 transition-opacity"
+            />
+            <div className="border-l border-white/20 pl-3 sm:pl-4">
               <span className="font-display text-xl sm:text-2xl font-bold tracking-widest text-white uppercase block">
                 Ari Smith
               </span>
