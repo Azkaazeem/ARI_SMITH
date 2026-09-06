@@ -1,4 +1,10 @@
-const API_BASE = '/api';
+// Deployed Vercel backend combined with localhost using || OR operators
+export const BACKEND_URL =
+  import.meta.env.VITE_API_URL ||
+  'https://ari-smith.vercel.app' ||
+  'http://localhost:5000';
+
+export const API_BASE = `${BACKEND_URL.replace(/\/$/, '')}/api`;
 
 export interface BookingPayload {
   name: string;

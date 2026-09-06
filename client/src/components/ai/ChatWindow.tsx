@@ -5,6 +5,7 @@ import type { BookingPrefill } from '../../context/BookingContext';
 import { useAudio } from '../../context/AudioContext';
 import { Send, Sparkles, Calendar, ArrowRight } from 'lucide-react';
 import aiRoboImg from '../../assets/AI robo.jpg';
+import { API_BASE } from '../../utils/api';
 
 interface ChatMessage {
   id: string;
@@ -64,7 +65,7 @@ export const ChatWindow: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setMessages(prev => [...prev, { id: assistantMsgId, role: 'assistant', content: '' }]);
 
     try {
-      const response = await fetch('/api/ai/chat', {
+      const response = await fetch(`${API_BASE}/ai/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
