@@ -1,0 +1,116 @@
+{
+  "reviews": [
+    {
+      "clientName": "Sir Alistair Vance",
+      "eventCategory": "BAFTA Gala Dinner (London)",
+      "quote": "Ari redefined what was possible. His psychological revelations left 400 hardened entertainment executives in stunned, breathless silence.",
+      "rating": 5,
+      "verifiedBadge": true,
+      "createdAt": "2026-06-14T00:00:00.000Z"
+    },
+    {
+      "clientName": "Elena Rostova",
+      "eventCategory": "Vogue International Showcase (Milan)",
+      "quote": "Unsettling, mesmerizing, and utterly inexplicable. The mind reading was so piercingly accurate it bordered on the supernatural.",
+      "rating": 5,
+      "verifiedBadge": true,
+      "createdAt": "2026-07-02T00:00:00.000Z"
+    },
+    {
+      "clientName": "Marcus & Julian Thorne",
+      "eventCategory": "Luxury Country Estate Wedding (Cotswolds)",
+      "quote": "Ari levitated our heirloom wedding rings three inches above our palms. Our 180 guests were spellbound. An unforgettable master of atmosphere.",
+      "rating": 5,
+      "verifiedBadge": true,
+      "createdAt": "2026-07-22T00:00:00.000Z"
+    },
+    {
+      "clientName": "Manchester Evening News",
+      "eventCategory": "Press Critique & Feature Review",
+      "quote": "Not merely sleight of hand—pure psychological theatre. Ari Smith is Manchester's dark gem, conjuring wonders that defy modern logic.",
+      "rating": 5,
+      "verifiedBadge": true,
+      "createdAt": "2026-08-05T00:00:00.000Z"
+    },
+    {
+      "clientName": "Dr. Henrik Lindqvist",
+      "eventCategory": "Global Tech Leadership Summit (Zurich)",
+      "quote": "The Grand Illusion stage show was the crown jewel of our global summit. 1,200 delegates witnessed impossible feats of telepathy.",
+      "rating": 5,
+      "verifiedBadge": true,
+      "createdAt": "2026-08-18T00:00:00.000Z"
+    },
+    {
+      "clientName": "Lady Camilla Beaumont",
+      "eventCategory": "Private Solstice Salon (Edinburgh Castle)",
+      "quote": "Intimate, chilling, yet exquisitely courteous. Ari unlocked secrets sealed in wax envelopes held by three independent witnesses.",
+      "rating": 5,
+      "verifiedBadge": true,
+      "createdAt": "2026-08-29T00:00:00.000Z"
+    }
+  ],
+  "bookings": [
+    {
+      "name": "Lord Sterling Hayes",
+      "email": "sterling.hayes@mayfairheritage.co.uk",
+      "phone": "+44 7700 900123",
+      "eventType": "Mind Reading & Mentalism",
+      "eventDate": "2026-09-18",
+      "venueCity": "London (Mayfair Club)",
+      "guestCount": 85,
+      "budgetRange": "£5,000 - £10,000",
+      "status": "confirmed",
+      "priceQuote": "£6,500",
+      "specialRequests": "VIP private parlour mentalism session before main performance.",
+      "createdAt": "2026-08-10T00:00:00.000Z"
+    },
+    {
+      "name": "Victoria Hemsley",
+      "email": "v.hemsley@artemis-events.com",
+      "phone": "+44 7700 900456",
+      "eventType": "Close-Up Sleight of Hand",
+      "eventDate": "2026-10-02",
+      "venueCity": "Manchester (The Lowry)",
+      "guestCount": 140,
+      "budgetRange": "£2,500 - £5,000",
+      "status": "confirmed",
+      "priceQuote": "£3,200",
+      "specialRequests": "Table-hopping sleight of hand during champagne cocktail reception.",
+      "createdAt": "2026-08-15T00:00:00.000Z"
+    },
+    {
+      "name": "Klaus Von Berg",
+      "email": "klaus@nordicluxury.ch",
+      "phone": "+41 22 710 4455",
+      "eventType": "The Grand Illusion Stage Show",
+      "eventDate": "2026-10-31",
+      "venueCity": "Geneva (Grand Hotel)",
+      "guestCount": 350,
+      "budgetRange": "£10,000+",
+      "status": "confirmed",
+      "priceQuote": "£14,500",
+      "specialRequests": "Full theatrical illusion stage setup including levitation finale.",
+      "createdAt": "2026-08-20T00:00:00.000Z"
+    }
+  ],
+  "settings": {
+    "activeNotice": "Now accepting bookings for the 2026 / 2027 UK & European Private Salon Tour.",
+    "blockedDates": [
+      "2026-09-12",
+      "2026-09-18",
+      "2026-09-25",
+      "2026-10-02",
+      "2026-10-15",
+      "2026-10-31",
+      "2026-11-14",
+      "2026-11-28",
+      "2026-12-12",
+      "2026-12-24",
+      "2026-12-31"
+    ],
+    "defaultTheme": "abyssal",
+    "contactEmail": "concierge@arismithmagic.com",
+    "adminUser": "ari@smith-illusion.co.uk",
+    "adminPasswordHash": "theillusionist"
+  }
+}

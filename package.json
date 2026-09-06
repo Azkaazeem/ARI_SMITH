@@ -1,0 +1,10 @@
+{
+  "name": "ari-smith-illusionist",
+  "version": "1.0.0",
+  "description": "Ultra-immersive 3D WebGL / MERN psychological thriller web application for Ari Smith",
+  "scripts": {
+    "dev:server": "cd server && npm start",
+    "dev:client": "cd client && npm run dev",
+    "build:client": "cd client && npm run build"
+  }
+}

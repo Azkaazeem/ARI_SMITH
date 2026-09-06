@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Default: Abyssal Obsidian */
+  --bg-primary: #080808;
+  --bg-secondary: #121212;
+  --bg-card: rgba(18, 18, 18, 0.85);
+  --accent-primary: #E2E8F0;
+  --accent-secondary: #4A5568;
+  --glow-color: rgba(226, 232, 240, 0.25);
+  --text-primary: #F8FAFC;
+  --text-muted: #94A3B8;
+  --border-color: rgba(255, 255, 255, 0.12);
+  --selection-bg: #4A5568;
+}
+
+[data-theme="abyssal"] {
+  --bg-primary: #080808;
+  --bg-secondary: #121212;
+  --bg-card: rgba(18, 18, 18, 0.85);
+  --accent-primary: #E2E8F0;
+  --accent-secondary: #4A5568;
+  --glow-color: rgba(226, 232, 240, 0.25);
+  --text-primary: #F8FAFC;
+  --text-muted: #94A3B8;
+  --border-color: rgba(255, 255, 255, 0.12);
+  --selection-bg: #4A5568;
+}
+
+[data-theme="crimson"] {
+  --bg-primary: #0B0204;
+  --bg-secondary: #190509;
+  --bg-card: rgba(25, 5, 9, 0.9);
+  --accent-primary: #E11D48;
+  --accent-secondary: #991B1B;
+  --glow-color: rgba(225, 29, 72, 0.4);
+  --text-primary: #FFF1F2;
+  --text-muted: #FDA4AF;
+  --border-color: rgba(225, 29, 72, 0.3);
+  --selection-bg: #991B1B;
+}
+
+[data-theme="toxic"] {
+  --bg-primary: #020A05;
+  --bg-secondary: #051A0D;
+  --bg-card: rgba(5, 26, 13, 0.9);
+  --accent-primary: #22C55E;
+  --accent-secondary: #10B981;
+  --glow-color: rgba(34, 197, 94, 0.35);
+  --text-primary: #F0FDF4;
+  --text-muted: #86EFAC;
+  --border-color: rgba(34, 197, 94, 0.28);
+  --selection-bg: #15803D;
+}
+
+[data-theme="amber"] {
+  --bg-primary: #0A0905;
+  --bg-secondary: #1A170A;
+  --bg-card: rgba(26, 23, 10, 0.9);
+  --accent-primary: #F59E0B;
+  --accent-secondary: #D97706;
+  --glow-color: rgba(245, 158, 11, 0.35);
+  --text-primary: #FEF3C7;
+  --text-muted: #FDE68A;
+  --border-color: rgba(245, 158, 11, 0.28);
+  --selection-bg: #B45309;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background-color: var(--selection-bg);
+  color: #FFFFFF;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+::-webkit-scrollbar-thumb {
+  background: #333333;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
+
+/* Vignette Screen Overlay */
+.vignette-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 0, 0, 0.9);
+}
+
+/* Continuous Infinite Marquee Animation - Smooth & Non-stop */
+@keyframes continuous-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-continuous-marquee {
+  display: flex;
+  width: max-content;
+  animation: continuous-marquee 28s linear infinite;
+  will-change: transform;
+}
+
+/* Animated Fast Undulating Wave for Footer */
+@keyframes wave-animation {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-wave-fast {
+  animation: wave-animation 5s linear infinite;
+  will-change: transform;
+}
+
+/* Screen Glitch Animation */
+.screen-glitch {
+  animation: glitch-anim 0.3s ease-in-out;
+}
+
+@keyframes glitch-anim {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* SweetAlert2 Luxury Dark Custom Theme */
+.swal2-popup.dark-luxury-swal {
+  background: #0D0D0D !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 4px !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95) !important;
+  padding: 2rem !important;
+}
+
+.swal2-popup.dark-luxury-swal .swal2-title {
+  color: #FFFFFF !important;
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  font-size: 1.35rem !important;
+}
+
+.swal2-popup.dark-luxury-swal .swal2-html-container {
+  color: #CBD5E1 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+}
+
+.swal2-confirm.dark-luxury-btn {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+  border-radius: 2px !important;
+  font-family: 'Cinzel', serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  padding: 10px 26px !important;
+  font-size: 0.8rem !important;
+}
