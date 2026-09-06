@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { FloatingCardDeck } from './FloatingCardDeck';
 import { SmokeOrbShader } from './SmokeOrbShader';
 import { ParticleField } from './ParticleField';
 import { useTheme } from '../../context/ThemeContext';
@@ -33,9 +32,6 @@ export const CanvasContainer: React.FC = () => {
 
           {/* Levitating Smoke Orb in background */}
           <SmokeOrbShader position={[0, 0.2, -1.8]} scale={1.75} />
-
-          {/* Floating Interactive 3D Playing Card Deck */}
-          <FloatingCardDeck position={[0, -0.1, 0.4]} />
 
           {/* Floating Embers / Ash Particles */}
           <ParticleField count={450} />

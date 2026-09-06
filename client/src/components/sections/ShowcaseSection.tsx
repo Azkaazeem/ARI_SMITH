@@ -1,16 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { useBooking } from '../../context/BookingContext';
 import { useAudio } from '../../context/AudioContext';
-import { Sparkles, Play, Check, Eye, ArrowRight, Heart, Briefcase, GlassWater } from 'lucide-react';
+import { Sparkles, Play, Check, ArrowRight, Heart, Briefcase, GlassWater } from 'lucide-react';
 
 import weddingImg from '../../assets/4.jpg';
 import corporateImg from '../../assets/6.jpg';
 import privateImg from '../../assets/7.jpg';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface ShowcaseSectionProps {
   onOpenVideo: (title: string, cat: string, desc: string) => void;
@@ -31,9 +27,6 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
   const { themeMeta } = useTheme();
   const { scrollToBooking } = useBooking();
   const { playClick, playChime } = useAudio();
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
 
   const [tilt, setTilt] = useState<{ [key: string]: { x: number; y: number } }>({});
 
@@ -90,39 +83,14 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -12;
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -10;
     setTilt(prev => ({ ...prev, [id]: { x, y } }));
   };
 
   const handleMouseLeave = (id: string) => {
     setTilt(prev => ({ ...prev, [id]: { x: 0, y: 0 } }));
   };
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-      mm.add("(min-width: 1024px)", () => {
-        if (containerRef.current && trackRef.current) {
-          const totalWidth = trackRef.current.scrollWidth - window.innerWidth + 120;
-          gsap.to(trackRef.current, {
-            x: () => -totalWidth,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top top',
-              end: () => `+=${totalWidth * 1.15}`,
-              scrub: 1,
-              pin: true,
-              invalidateOnRefresh: true
-            }
-          });
-        }
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const handleSelectService = (title: string) => {
     playChime(1.2);
@@ -132,13 +100,12 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
   return (
     <section
       id="services"
-      ref={containerRef}
-      className="relative w-full min-h-screen bg-[#060606] py-24 overflow-hidden border-t border-white/10"
+      className="relative w-full bg-[#060606] py-24 overflow-hidden border-t border-white/10"
     >
       {/* Header */}
       <div className="max-w-7xl mx-auto px-6 sm:px-12 mb-16">
         <div className="inline-flex items-center gap-2 px-3 py-1 border border-white/20 bg-white/5 text-[11px] font-mono tracking-[0.25em] uppercase text-white/70 mb-3">
-          <Eye className="w-3.5 h-3.5" style={{ color: themeMeta.accentHex }} />
+          <Sparkles className="w-3.5 h-3.5" style={{ color: themeMeta.accentHex }} />
           <span>What I Do &bull; Services & Formats</span>
         </div>
         <h2 className="font-display text-3xl sm:text-5xl font-bold uppercase tracking-wider text-white">
@@ -150,12 +117,9 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
         </p>
       </div>
 
-      {/* Horizontal Scroll Track (Sharp Cards) */}
-      <div className="w-full px-4 sm:px-12">
-        <div
-          ref={trackRef}
-          className="flex flex-col lg:flex-row gap-8 lg:gap-10 w-full lg:w-max items-stretch"
-        >
+      {/* Static 3-Card Grid with Rich Hover Effects */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {services.map((svc) => {
             const cardTilt = tilt[svc.id] || { x: 0, y: 0 };
             return (
@@ -163,12 +127,17 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
                 key={svc.id}
                 onMouseMove={(e) => handleMouseMove(e, svc.id)}
                 onMouseLeave={() => handleMouseLeave(svc.id)}
-                className="w-full max-w-full lg:w-[460px] border border-white/15 bg-[#0C0C0C] flex flex-col justify-between transition-all duration-300 shadow-2xl relative group overflow-hidden"
+                className="w-full border border-white/15 bg-[#0C0C0C] flex flex-col justify-between transition-all duration-300 shadow-2xl relative group overflow-hidden hover:-translate-y-2 hover:border-white/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
                 style={{
-                  transform: `perspective(1000px) rotateX(${cardTilt.y}deg) rotateY(${cardTilt.x}deg)`,
-                  borderColor: cardTilt.x !== 0 ? themeMeta.accentHex : 'rgba(255, 255, 255, 0.15)'
+                  transform: cardTilt.x !== 0 ? `perspective(1000px) rotateX(${cardTilt.y}deg) rotateY(${cardTilt.x}deg)` : undefined,
+                  borderColor: cardTilt.x !== 0 ? themeMeta.accentHex : undefined
                 }}
               >
+                {/* Accent Top Highlight Bar on Hover */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                  style={{ backgroundColor: themeMeta.accentHex }}
+                />
                 {/* Photo Top Header */}
                 <div className="relative aspect-[16/9] w-full overflow-hidden bg-black border-b border-white/10">
                   <img

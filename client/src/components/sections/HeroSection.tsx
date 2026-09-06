@@ -1,15 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CanvasContainer } from '../3d/CanvasContainer';
 import { useTheme } from '../../context/ThemeContext';
 import { useBooking } from '../../context/BookingContext';
-import { Sparkles, Eye, Award, Globe, ArrowRight, Shield } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
-import heroImg from '../../assets/hero.png';
 import herosecImg from '../../assets/herosec.jpg';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface HeroSectionProps {
   onOpenVideo: (title: string, cat: string, desc: string) => void;
@@ -24,7 +20,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
   const subtitleRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
-  const portraitRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -42,11 +37,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
         stagger: 0.2,
         duration: 1.1
       }, '-=0.6')
-      .from(portraitRef.current, {
-        opacity: 0,
-        scale: 0.95,
-        duration: 1.2
-      }, '-=0.8')
       .from(subtitleRef.current, {
         opacity: 0,
         y: 20,
@@ -57,46 +47,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
         y: 20,
         duration: 0.8
       }, '-=0.6');
-
-      // ScrollTrigger Pinned Hero Split (Only on desktop to keep mobile silky smooth):
-      if (containerRef.current && textTopRef.current && textBottomRef.current && window.innerWidth >= 768) {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top top',
-            end: '+=100%',
-            scrub: 1.2,
-            pin: true,
-          }
-        })
-        .to(textTopRef.current, {
-          x: -160,
-          opacity: 0.12,
-          scale: 1.1,
-          ease: 'none'
-        })
-        .to(textBottomRef.current, {
-          x: 160,
-          opacity: 0.12,
-          scale: 1.1,
-          ease: 'none'
-        }, 0)
-        .to(portraitRef.current, {
-          opacity: 0.2,
-          scale: 1.05,
-          ease: 'none'
-        }, 0)
-        .to(subtitleRef.current, {
-          opacity: 0,
-          y: -40,
-          ease: 'none'
-        }, 0)
-        .to(ctaRef.current, {
-          opacity: 0,
-          scale: 0.92,
-          ease: 'none'
-        }, 0);
-      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -158,29 +108,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
           </h1>
         </div>
 
-        {/* Real Ari Portrait Graphic Layer */}
-        <div
-          ref={portraitRef}
-          className="pointer-events-auto my-2 relative w-32 h-32 sm:w-40 sm:h-40 border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden p-1 shadow-2xl group transition-transform duration-500 hover:scale-105"
-        >
-          <img
-            src={heroImg}
-            alt="Ari Smith Magician & Mentalist"
-            className="w-full h-full object-cover grayscale-0 md:grayscale md:contrast-125 md:group-hover:grayscale-0 transition-all duration-500"
-          />
-          <div
-            className="absolute inset-0 border pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-300"
-            style={{ borderColor: themeMeta.accentHex }}
-          />
-        </div>
-
         {/* Authentic Subtitle from arismith.co.uk */}
-        <div ref={subtitleRef} className="max-w-2xl mb-8 mt-2">
+        <div ref={subtitleRef} className="max-w-2xl mb-8 mt-4">
           <p className="font-serif text-sm sm:text-lg text-white/90 font-light tracking-wide leading-relaxed">
             Unforgettable close-up magic, mind-reading and illusion that captivates, amazes and sparks conversation long after the event has ended.
-          </p>
-          <p className="text-[10px] font-mono text-white/40 tracking-[0.25em] uppercase mt-2">
-            Click cards in 3D space to disperse &bull; Drag to tilt realm
           </p>
         </div>
 
@@ -206,7 +137,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
             onClick={scrollToGallery}
             className="w-full sm:w-auto px-8 py-3.5 border border-white/25 bg-black/60 hover:bg-white/10 text-white font-serif text-xs sm:text-sm tracking-[0.25em] uppercase transition-all duration-300 flex items-center justify-center gap-2.5"
           >
-            <Eye className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4" />
             <span>View Gallery</span>
           </button>
         </div>
