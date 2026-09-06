@@ -39,7 +39,7 @@ export const Footer: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin }) =
   };
 
   return (
-    <footer className="relative w-full bg-black text-white/70 pt-24 pb-12 px-4 sm:px-12 font-serif overflow-hidden">
+    <footer className="relative w-full bg-black text-white/70 pt-28 pb-12 px-4 sm:px-12 font-serif overflow-x-clip">
       
       {/* Glowing Laser Wave Line with Left Particle Spark Nebula */}
       <FooterWave />
