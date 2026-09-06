@@ -101,21 +101,24 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      if (containerRef.current && trackRef.current && window.innerWidth >= 1024) {
-        const totalWidth = trackRef.current.scrollWidth - window.innerWidth + 120;
-        gsap.to(trackRef.current, {
-          x: () => -totalWidth,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top top',
-            end: () => `+=${totalWidth * 1.15}`,
-            scrub: 1,
-            pin: true,
-            invalidateOnRefresh: true
-          }
-        });
-      }
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px)", () => {
+        if (containerRef.current && trackRef.current) {
+          const totalWidth = trackRef.current.scrollWidth - window.innerWidth + 120;
+          gsap.to(trackRef.current, {
+            x: () => -totalWidth,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top top',
+              end: () => `+=${totalWidth * 1.15}`,
+              scrub: 1,
+              pin: true,
+              invalidateOnRefresh: true
+            }
+          });
+        }
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -148,7 +151,7 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
       </div>
 
       {/* Horizontal Scroll Track (Sharp Cards) */}
-      <div className="w-full px-6 sm:px-12">
+      <div className="w-full px-4 sm:px-12">
         <div
           ref={trackRef}
           className="flex flex-col lg:flex-row gap-8 lg:gap-10 w-full lg:w-max items-stretch"
@@ -160,7 +163,7 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
                 key={svc.id}
                 onMouseMove={(e) => handleMouseMove(e, svc.id)}
                 onMouseLeave={() => handleMouseLeave(svc.id)}
-                className="w-full lg:w-[460px] border border-white/15 bg-[#0C0C0C] flex flex-col justify-between transition-all duration-300 shadow-2xl relative group overflow-hidden"
+                className="w-full max-w-full lg:w-[460px] border border-white/15 bg-[#0C0C0C] flex flex-col justify-between transition-all duration-300 shadow-2xl relative group overflow-hidden"
                 style={{
                   transform: `perspective(1000px) rotateX(${cardTilt.y}deg) rotateY(${cardTilt.x}deg)`,
                   borderColor: cardTilt.x !== 0 ? themeMeta.accentHex : 'rgba(255, 255, 255, 0.15)'
@@ -171,7 +174,7 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
                   <img
                     src={svc.image}
                     alt={svc.title}
-                    className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    className="w-full h-full object-cover grayscale-0 md:grayscale md:contrast-110 md:group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-transparent to-black/30" />
                   
@@ -183,9 +186,9 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
                 </div>
 
                 {/* Body Content */}
-                <div className="p-8 space-y-4 flex-1">
+                <div className="p-5 sm:p-8 space-y-4 flex-1">
                   <div>
-                    <h3 className="font-display text-2xl font-bold text-white tracking-wide uppercase">
+                    <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-wide uppercase">
                       {svc.title}
                     </h3>
                     <p className="font-mono text-xs text-white/50 tracking-wider uppercase mt-1" style={{ color: themeMeta.accentHex }}>
@@ -211,14 +214,14 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
                   </div>
                 </div>
 
-                {/* Action Buttons (Sharp Rectangles) */}
-                <div className="p-6 border-t border-white/10 bg-black/40 flex items-center gap-3">
+                {/* Action Buttons (Sharp Rectangles, Responsive Wrapping) */}
+                <div className="p-4 sm:p-6 border-t border-white/10 bg-black/40 flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-3">
                   <button
                     onClick={() => {
                       playClick();
                       onOpenVideo(svc.title, svc.category, svc.description);
                     }}
-                    className="flex-1 py-3 px-4 border border-white/15 bg-white/5 hover:bg-white/10 text-white font-serif text-xs font-semibold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2"
+                    className="flex-1 py-3 px-3 sm:px-4 border border-white/15 bg-white/5 hover:bg-white/10 text-white font-serif text-xs font-semibold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2"
                   >
                     <Play className="w-3.5 h-3.5" />
                     <span>View Archive</span>
@@ -226,7 +229,7 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onOpenVideo })
 
                   <button
                     onClick={() => handleSelectService(svc.title)}
-                    className="flex-1 py-3 px-4 border font-serif text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 hover:brightness-110 active:scale-95"
+                    className="flex-1 py-3 px-3 sm:px-4 border font-serif text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 hover:brightness-110 active:scale-95"
                     style={{
                       borderColor: themeMeta.accentHex,
                       backgroundColor: 'rgba(255, 255, 255, 0.08)',

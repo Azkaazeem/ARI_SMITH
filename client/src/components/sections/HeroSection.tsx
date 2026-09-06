@@ -166,7 +166,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenVideo }) => {
           <img
             src={heroImg}
             alt="Ari Smith Magician & Mentalist"
-            className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
+            className="w-full h-full object-cover grayscale-0 md:grayscale md:contrast-125 md:group-hover:grayscale-0 transition-all duration-500"
           />
           <div
             className="absolute inset-0 border pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-300"

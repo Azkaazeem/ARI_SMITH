@@ -87,7 +87,7 @@ export const GallerySection: React.FC = () => {
               <img
                 src={item.src}
                 alt={item.caption}
-                className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                className="w-full h-full object-cover grayscale-0 md:grayscale-[30%] md:group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
                 loading="lazy"
               />
 

@@ -74,41 +74,41 @@ export const Navigation: React.FC<NavigationProps> = () => {
           ))}
         </nav>
 
-        {/* Right: Explicit, Clear Controls */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        {/* Right: Explicit, Responsive Controls */}
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
 
-          {/* 1. Clear Sound Ambience Button */}
+          {/* 1. Sound Ambience Toggle (Icon-only on mobile, text on sm+) */}
           <button
             onClick={toggleAudio}
-            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 border text-[10px] sm:text-[11px] font-mono tracking-wider uppercase transition-all duration-200 ${
+            className={`flex items-center justify-center gap-1.5 px-2 sm:px-3 py-1.5 border text-[10px] sm:text-[11px] font-mono tracking-wider uppercase transition-all duration-200 shrink-0 ${
               isPlaying
                 ? 'border-white bg-white text-black font-bold'
                 : 'border-white/20 bg-white/5 text-white/70 hover:text-white hover:border-white/40'
             }`}
-            title={isPlaying ? 'Mute Atmospheric Drone' : 'Turn On Atmospheric Drone Sound'}
+            title={isPlaying ? 'Mute Atmospheric Audio' : 'Turn On Atmospheric Audio'}
           >
             {isPlaying ? (
               <>
                 <Volume2 className="w-3.5 h-3.5 animate-pulse" />
-                <span>Sound: On</span>
+                <span className="hidden sm:inline">Sound: On</span>
               </>
             ) : (
               <>
                 <VolumeX className="w-3.5 h-3.5 text-white/50" />
-                <span>Sound: Off</span>
+                <span className="hidden sm:inline">Sound: Off</span>
               </>
             )}
           </button>
 
-          {/* 2. Clear Theme Switcher Dropdown */}
-          <div className="relative" ref={themeRef}>
+          {/* 2. Theme Switcher (Desktop & Tablet only on top bar; also in mobile drawer) */}
+          <div className="relative hidden sm:block" ref={themeRef}>
             <button
               onClick={() => setThemeOpen(prev => !prev)}
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 border border-white/20 bg-white/5 hover:border-white/40 text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-white/80 transition-all duration-200"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 border border-white/20 bg-white/5 hover:border-white/40 text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-white/80 transition-all duration-200 shrink-0"
               title="Change Color Theme"
             >
               <Palette className="w-3.5 h-3.5 text-white/70" />
-              <span className="hidden sm:inline">Theme:</span>
+              <span className="hidden md:inline">Theme:</span>
               <span
                 className="w-2.5 h-2.5 border border-white/30"
                 style={{ backgroundColor: themeMeta.accentHex }}
@@ -153,7 +153,7 @@ export const Navigation: React.FC<NavigationProps> = () => {
           {/* 3. Primary Booking CTA */}
           <button
             onClick={() => scrollToBooking()}
-            className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 font-serif text-xs font-bold tracking-[0.15em] uppercase border transition-all duration-200 hover:brightness-110 active:scale-95"
+            className="flex items-center gap-1 px-2.5 sm:px-4 py-1.5 font-serif text-[11px] sm:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] uppercase border transition-all duration-200 hover:brightness-110 active:scale-95 shrink-0"
             style={{
               borderColor: themeMeta.accentHex,
               backgroundColor: 'rgba(255, 255, 255, 0.08)',
@@ -167,7 +167,7 @@ export const Navigation: React.FC<NavigationProps> = () => {
           {/* 4. Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(prev => !prev)}
-            className="lg:hidden p-1.5 border border-white/20 bg-white/5 text-white ml-1"
+            className="lg:hidden p-1.5 border border-white/20 bg-white/5 text-white shrink-0 hover:bg-white/10"
             title="Open Menu"
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -179,26 +179,54 @@ export const Navigation: React.FC<NavigationProps> = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden pointer-events-auto max-w-7xl mx-auto mt-2 border border-white/20 bg-[#0C0C0C] p-4 flex flex-col gap-2 font-mono text-xs uppercase tracking-widest text-white shadow-2xl">
-          {navLinks.map((link, i) => (
-            <a
-              key={i}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-3 border-b border-white/5 hover:bg-white/5 transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+        <div className="lg:hidden pointer-events-auto max-w-7xl mx-auto mt-2 border border-white/20 bg-[#0C0C0C]/98 backdrop-blur-2xl p-4 sm:p-5 flex flex-col gap-3 font-mono text-xs uppercase tracking-widest text-white shadow-2xl animate-in fade-in duration-200">
+          
+          {/* Mobile Theme Selector Swatches */}
+          <div className="p-3 border border-white/10 bg-white/5 space-y-2">
+            <div className="flex items-center justify-between text-[10px] text-white/50">
+              <span className="flex items-center gap-1.5"><Palette className="w-3.5 h-3.5" /> Visual Ambience:</span>
+              <span className="text-white font-bold">{themeMeta.name}</span>
+            </div>
+            <div className="grid grid-cols-4 gap-2 pt-1">
+              {THEMES.map(t => (
+                <button
+                  key={t.id}
+                  onClick={() => setTheme(t.id)}
+                  className={`py-1.5 px-2 border text-[9px] flex items-center justify-center gap-1.5 transition-colors ${
+                    theme === t.id ? 'border-white bg-white/20 text-white font-bold' : 'border-white/15 bg-black/60 text-white/60'
+                  }`}
+                >
+                  <span className="w-2.5 h-2.5 border border-white/30" style={{ backgroundColor: t.accentHex }} />
+                  <span>{t.id}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile Nav Links */}
+          <div className="space-y-1">
+            {navLinks.map((link, i) => (
+              <a
+                key={i}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-2.5 px-3 block border-b border-white/5 hover:bg-white/5 transition-colors text-white/80 hover:text-white"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
           <button
             onClick={() => {
               setMobileMenuOpen(false);
               scrollToBooking();
             }}
-            className="mt-2 w-full py-3 border font-serif text-xs font-bold tracking-widest uppercase text-white hover:bg-white/10"
-            style={{ borderColor: themeMeta.accentHex }}
+            className="mt-2 w-full py-3 border font-serif text-xs font-bold tracking-widest uppercase text-white hover:bg-white/10 flex items-center justify-center gap-2"
+            style={{ borderColor: themeMeta.accentHex, backgroundColor: 'rgba(255,255,255,0.06)' }}
           >
-            Check Availability & Book Ari
+            <Sparkles className="w-3.5 h-3.5" style={{ color: themeMeta.accentHex }} />
+            <span>Check Availability & Book Ari</span>
           </button>
         </div>
       )}

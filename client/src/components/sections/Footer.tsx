@@ -1,38 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { useBooking } from '../../context/BookingContext';
-import { Clock, Shield, ArrowUp, Mail, Instagram, Globe } from 'lucide-react';
+import { Shield, ArrowUp, Mail, Instagram, Globe } from 'lucide-react';
 import realLogo from '../../assets/logo.png';
 import { FooterWave } from '../ui/FooterWave';
 
 export const Footer: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin }) => {
   const { themeMeta } = useTheme();
   const { scrollToBooking } = useBooking();
-  const [manchesterTime, setManchesterTime] = useState('');
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone: 'Europe/London',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      };
-      const timeStr = new Intl.DateTimeFormat('en-GB', options).format(now);
-      const isBST = Boolean(
-        new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', timeZoneName: 'short' })
-          .format(now)
-          .includes('BST')
-      );
-      setManchesterTime(`${timeStr} ${isBST ? 'BST' : 'GMT'}`);
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -53,9 +28,8 @@ export const Footer: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin }) =
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-14">
         
-        {/* Top Header Split: Logo & Real-Time Manchester Clock */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-10 border-b border-white/10">
-          
+        {/* Top Header: Brand Logo & Title */}
+        <div className="flex items-center justify-between pb-8 border-b border-white/10">
           <div className="flex items-center gap-4">
             <img
               src={realLogo}
@@ -71,30 +45,6 @@ export const Footer: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin }) =
               </p>
             </div>
           </div>
-
-          {/* Dynamic Real-Time Manchester Clock */}
-          <div className="flex items-center gap-3 p-3 border border-white/15 bg-white/5">
-            <div className="relative w-2 h-2 flex items-center justify-center">
-              <span
-                className="absolute inset-0 animate-ping opacity-75"
-                style={{ backgroundColor: themeMeta.accentHex }}
-              />
-              <span
-                className="relative w-1.5 h-1.5"
-                style={{ backgroundColor: themeMeta.accentHex }}
-              />
-            </div>
-            <div>
-              <div className="flex items-center gap-1 text-[8px] sm:text-[9px] font-mono tracking-widest text-white/40 uppercase">
-                <Clock className="w-3 h-3 text-white/40" />
-                <span>Manchester Local Time</span>
-              </div>
-              <div className="font-mono text-xs sm:text-sm font-bold text-white tracking-wider">
-                {manchesterTime || '19:00:00 BST'}
-              </div>
-            </div>
-          </div>
-
         </div>
 
         {/* Navigation & Contact Columns */}

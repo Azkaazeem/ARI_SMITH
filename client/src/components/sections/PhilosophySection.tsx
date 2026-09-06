@@ -76,7 +76,7 @@ export const PhilosophySection: React.FC = () => {
               <img
                 src={photoAri}
                 alt="Ari Smith Magician, Mentalist & Illusionist"
-                className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover grayscale-0 md:grayscale md:contrast-110 md:group-hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
 
